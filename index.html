@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intl-tel-input</title>
+	<link rel="stylesheet" type="text/css" href="intlTelInput.min.css">
+	<script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="intlTelInput.min.js"></script>
+</head>
+<body>
+
+<input type="tel" id="phone"> <br><br>
+country code: <p id="country_code"></p>
+dial code: <p id="dial_code"></p>
+
+<script type="text/javascript">
+    var input = document.querySelector("#phone");
+    var iti = intlTelInput(input);
+    iti.setCountry("cu"); // set default country cuba
+    var countryData = iti.getSelectedCountryData();
+
+    $('#country_code').val(countryData.iso2);
+    $('#dial_code').val(countryData.dialCode);
+
+    input.addEventListener("countrychange", function() {
+        // do something with iti.getSelectedCountryData()
+        countryData = iti.getSelectedCountryData();
+
+        $('#country_code').text(countryData.iso2);
+        $('#dial_code').text(countryData.dialCode);
+    });
+</script>
+
+</body>
+</html>
